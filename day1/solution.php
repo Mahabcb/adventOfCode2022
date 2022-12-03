@@ -1,12 +1,12 @@
 <?php
 
-$input = file_get_contents('inputs/day01');
+$input = file_get_contents('input.txt');
 
 
-$lines= explode("
-", $input);
+$lines= explode("\n", $input);
 
 // Part 1 
+
 $sum = array_reduce($lines, function($carry, $item) {
     if (empty($item)) {
         $carry[] = 0;
@@ -16,8 +16,7 @@ $sum = array_reduce($lines, function($carry, $item) {
     return $carry;
 }, [0]);
 
-// Get the max : 
-// var_dump(max($sum));
+print_r('Part 1: The elf with the most calories has a total of : ' . max($sum) .' calories ' . PHP_EOL);
 
 // Part 2
 
@@ -29,4 +28,4 @@ function getThreeElvesCalories($input){
     }
     return array_sum($array);
 }
-print_r(getThreeElvesCalories($sum));
+print_r('Part 2: the three eleves with the most calories have a total of : ' . getThreeElvesCalories($sum) . ' calories ' . PHP_EOL);
