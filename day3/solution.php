@@ -14,10 +14,34 @@ $alphabet= [
     'U' => 47, 'V' => 48, 'W' => 49, 'X' => 50, 'Y' => 51, 'Z' => 52,
 ]; 
 
+
+// Part 1
+
+$score = 0;
+$array = [];
+foreach($lines as $key => $line) {
+    //supprimer les ligne vide
+    if($line == "") {
+        unset($lines[$key]);
+    }else{
+        $count=strlen($line);
+        $compartiment1= str_split(substr($line, 0, $count/2));
+        $compartiment2 = str_split(substr($line, $count/2, $count));
+        $sameItems = array_unique(array_intersect($compartiment1, $compartiment2));
+        // replace array key from sameitem by value of alphabet
+        $sameItems = array_map(function($item) use ($alphabet) {
+            return $alphabet[$item];
+        }, $sameItems);
+       foreach($sameItems as $key => $item) {
+            $array[] = $item;
+       }
+    }
+
+}
+print_r("The value is : " . array_sum($array). PHP_EOL);
+
 // Part 2 : 
 
-
-// get an array of 3 lines
  function getAnArrayWithThreeLine($lines){
     $array = [];
     for($i = 0; $i < count($lines); $i+=3){
@@ -54,7 +78,6 @@ function getTheLetter($array){
 $letters = getTheLetter($arrayOfThree);
 
 
-// get the value of hte letter in alphabet
 function getTheValueOfTheLetter($letters, $alphabet){
     $values = [];
     foreach ($letters as $key => $value) {
@@ -68,32 +91,6 @@ $letter = getTheLetter($arrayOfThree);
 
 $value = getTheValueOfTheLetter($letters, $alphabet);
 
-print_r("The value of the letters is : " . $value);
+print_r("The value of the letters is : " . $value . PHP_EOL);
 
-
-// Part 1
-
-// $score = 0;
-// $array = [];
-// foreach($lines as $key => $line) {
-//     //supprimer les ligne vide
-//     if($line == "") {
-//         unset($lines[$key]);
-//     }else{
-//         $count=strlen($line);
-//         $compartiment1= str_split(substr($line, 0, $count/2));
-//         $compartiment2 = str_split(substr($line, $count/2, $count));
-//         $sameItems = array_unique(array_intersect($compartiment1, $compartiment2));
-//         var_dump($sameItems);
-//         // replace array key from sameitem by value of alphabet
-//         $sameItems = array_map(function($item) use ($alphabet) {
-//             return $alphabet[$item];
-//         }, $sameItems);
-//        foreach($sameItems as $key => $item) {
-//             $array[] = $item;
-//        }
-//     }
-
-// }
-// print_r(array_sum($array));
 
